@@ -5,9 +5,16 @@ This script intends to act as an alternative to the standard Mesos UI.
 This requires `sshuttle` to be running.
 The default target is `odhecx52:5040`. This can be overridden via the `-m` and/or `-p` parameters.
 
+Requires Python 3 and packages in requirements.txt
+
+To install the requirements, run:
+```bash
+pip install -r requirements.txt
+```
+
 ## How to use it
 ```bash
-usage: mesosython.py [-h] [-H HELP] [-a APP] [-m MASTER] [-p PORT] [-w]
+usage: mesos_cli.py [-h] [-H HELP] [-a APP] [-m MASTER] [-p PORT] [-w]
 
 Mesos Master Status Parser
 
@@ -25,13 +32,13 @@ optional arguments:
 
 ```bash
 # To view the full list of registered frameworks:
-python mesosython.py
+python mesos_cli.py
 
 # To view a single framework by name:
 ### The name is taken from the list returned via the first call.
-python mesosython.py -a my_spark_job
+python mesos_cli.py -a my_spark_job
 
 # To watch the framework:
 ### The watch triggers every 5 seconds.
-python mesosython.py -a my_spark_job -w
+python mesos_cli.py -a my_spark_job -w
 ```
