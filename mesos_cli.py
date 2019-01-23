@@ -259,14 +259,16 @@ class MesosParser(object):
         data = self.get_json_by_rest(url, framework_id)
         # print(data)
         frameworks = data["frameworks"]
+
         if self.app_name and len(frameworks) != 1:
             self.framework_id = self.get_framework_id(self.frameworks_url, self.app_name)
         table = []
-
+        if self.app_name:
+            print("Watching framework: ", self.app_name)
         print("Fetching frameworks from: ",self.frameworks_url, "Total: ", len(frameworks))
         print("Fetching metrics from: ", self.metrics_url)
         self.print_legend()
-        
+
         for framework in frameworks:
             resources = framework["resources"]
             name = framework["name"]
@@ -288,22 +290,22 @@ class MesosParser(object):
                 color = Fore.GREEN
 
             table.append([
-                  color + name,
-                  Fore.MAGENTA + "{:.2GiB}".format(DataSize(memory)),
-                  Fore.CYAN + str(cpus),
-                  Fore.YELLOW + tasks_len, 
-                  Fore.GREEN + uptime,
-                  Fore.GREEN + uptime_discriptive,
-                  Fore.WHITE + url,
-                  Fore.GREEN + self.get_tasks_str(tasks)
-                  ])
+                color + name,
+                Fore.MAGENTA + "{:.2GiB}".format(DataSize(memory)),
+                Fore.CYAN + str(cpus),
+                Fore.YELLOW + tasks_len,
+                Fore.GREEN + uptime,
+                Fore.GREEN + uptime_discriptive,
+                Fore.WHITE + url,
+                Fore.GREEN + self.get_tasks_str(tasks)
+            ])
 
 
-        print(tabulate(sorted(table, 
-            key=lambda x: x[0]), 
-            headers=['s/n','framework', 'memory', '#cpu', '#tasks', 'up_since', 'uptime', 'url', 'tasks'], 
-            tablefmt="rst",
-            showindex="always"))
+        print(tabulate(sorted(table,
+                              key=lambda x: x[0]),
+                       headers=['s/n','framework', 'memory', '#cpu', '#tasks', 'up_since', 'uptime', 'url', 'tasks'],
+                       tablefmt="rst",
+                       showindex="always"))
 
     def get_url_for_frameworks(self, host, port):
         return "http://{}:{}/master/frameworks".format(host, port)
