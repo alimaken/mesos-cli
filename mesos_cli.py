@@ -95,7 +95,7 @@ class MesosParser(object):
         mesos_metrics.print_metrics()
 
         data = self.get_json_by_rest(url, framework_id)
-        # print(data)
+        print(data)
         frameworks = data["frameworks"]
 
         if self.app_name and len(frameworks) != 1:
