@@ -20,8 +20,8 @@ Mesos Master Status Parser
 
 optional arguments:
   -h, --help            show this help message and exit
-  -H HELP, --Help HELP  Example: Help argument
   -a APP, --app APP     Application Name
+  -r REGEX, --regex REGEX     Application Name Regex
   -m MASTER, --master MASTER
                         Mesos Master Host Name
   -p PORT, --port PORT  Port Number
@@ -37,6 +37,9 @@ python mesos_cli.py
 # To view a single framework by name:
 ### The name is taken from the list returned via the first call.
 python mesos_cli.py -a my_spark_job
+
+# To view a single framework by name matching a regex:
+python mesos_cli.py -r 'spark.*job'
 
 # To watch the framework:
 ### The watch triggers every 5 seconds.
