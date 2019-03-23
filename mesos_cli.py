@@ -95,7 +95,6 @@ class MesosParser(object):
         mesos_metrics.print_metrics()
 
         data = self.get_json_by_rest(url, framework_id)
-        print(data)
         frameworks = data["frameworks"]
 
         if self.app_name and len(frameworks) != 1:
@@ -191,11 +190,10 @@ class MesosParser(object):
     def get_json_by_rest(url_path, framework_ids=[]):
         # url = "http://odhecx52:5040/master/frameworks?framework_id=d819d33b-0495-4269-a6ce-23fbe37ca6aa-90314"
         if framework_ids and len(framework_ids) > 0:
-            print("framework_ids is: ", framework_ids)
+            print("framework_ids are [{}]".format(framework_ids))
             data = {"frameworks": []}
             for framework_id in framework_ids:
                 url_path_framework = url_path + "?framework_id={}".format(framework_id)
-                print("url_path is: ", url_path_framework)
                 resp = requests.get(url=url_path_framework)
                 resp_json = resp.json()
                 data["frameworks"].append(resp_json["frameworks"][0])
