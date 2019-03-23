@@ -190,7 +190,7 @@ class MesosParser(object):
     def get_json_by_rest(url_path, framework_ids=[]):
         # url = "http://odhecx52:5040/master/frameworks?framework_id=d819d33b-0495-4269-a6ce-23fbe37ca6aa-90314"
         if framework_ids and len(framework_ids) > 0:
-            print("framework_ids are [{}]".format(framework_ids))
+            print("framework_ids are: ", framework_ids)
             data = {"frameworks": []}
             for framework_id in framework_ids:
                 url_path_framework = url_path + "?framework_id={}".format(framework_id)
@@ -209,7 +209,6 @@ class MesosParser(object):
             if res:
                 for framework in res["frameworks"]:
                     if re.search(app_name_regex, framework["name"]):
-                        print("Framework ID: ", framework["id"])
                         frameworks_lst.append(framework["id"])
 
             return frameworks_lst
@@ -219,7 +218,6 @@ class MesosParser(object):
                 if res:
                     for framework in res["frameworks"]:
                         if framework["name"] == app_name:
-                            print("Framework ID: ", framework["id"])
                             return [framework["id"]]
                 return ["SomeFramework"]
             else:
