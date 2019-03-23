@@ -190,11 +190,15 @@ class MesosParser(object):
     @staticmethod
     def get_json_by_rest(url_path, framework_ids=[]):
         # url = "http://odhecx52:5040/master/frameworks?framework_id=d819d33b-0495-4269-a6ce-23fbe37ca6aa-90314"
-        data = {"frameworks": []}
-        for framework_id in framework_ids:
-            url_path = url_path + "?framework_id={}".format(framework_id)
-            resp = requests.get(url=url_path)
-            data["frameworks"].append(resp.json())
+        if len(framework_ids) > 0:
+            data = {"frameworks": []}
+            for framework_id in framework_ids:
+                url_path = url_path + "?framework_id={}".format(framework_id)
+                resp = requests.get(url=url_path)
+                data["frameworks"].append(resp.json())
+            return data
+        resp = requests.get(url=url_path)
+        data = resp.json()
         return data
 
     def get_framework_id(self, url, app_name, app_name_regex=None):
