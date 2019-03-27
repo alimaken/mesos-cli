@@ -2,7 +2,7 @@
 class Helpers(object):
 
     @staticmethod
-    def get_percent(value: str, precision: 2) -> float:
+    def get_percent(value: str, precision: int = 2) -> float:
         """
         Converts a string representation of percentage of `0.00 - 1.00` to `0.00 - 100.00`
         :param precision: Precision to be used for return float value
