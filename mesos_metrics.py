@@ -1,7 +1,9 @@
 import datetime
 
+
 from colorama import Fore, Style
 from tabulate import tabulate
+from common.helpers import Helpers as helper
 
 
 class MesosMetrics(object):
@@ -62,10 +64,10 @@ class MesosMetrics(object):
                 "Inactive: " + str(int(self.master_frameworks_inactive)),
             ],
             [Fore.GREEN + "RESOURCES" + Style.RESET_ALL], [
-                "cpus %: " + str(self.resources_master_cpus_percent),
+                "cpus %: " + str(helper.get_percent(str(self.resources_master_cpus_percent))),
                 "cpus total: " + str(int(self.resources_master_cpus_total)),
                 "cpus used: " + str(int(self.resources_master_cpus_used))], [
-                "mem %: " + str(self.resources_master_mem_percent),
+                "mem %: " + str(helper.get_percent(str(self.resources_master_mem_percent))),
                 "mem total: " + str(int(self.resources_master_mem_total)),
                 "mem used: " + str(int(self.resources_master_mem_used)),
             ],
