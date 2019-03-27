@@ -14,14 +14,14 @@ pip install -r requirements.txt
 
 ## How to use it
 ```bash
-usage: mesos_cli.py [-h] [-H HELP] [-a APP] [-m MASTER] [-p PORT] [-w]
+usage: mesos_cli.py [-h] [-a APP | -r APP-REGEX] [-m MASTER] [-p PORT] [-w]
 
 Mesos Master Status Parser
 
 optional arguments:
   -h, --help            show this help message and exit
   -a APP, --app APP     Application Name
-  -r REGEX, --regex REGEX     Application Name Regex
+  -r REGEX, --regex REGEX     Application Name Regex. Overrides `-a`
   -m MASTER, --master MASTER
                         Mesos Master Host Name
   -p PORT, --port PORT  Port Number
