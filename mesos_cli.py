@@ -228,8 +228,12 @@ class MesosParser(object):
 
     @staticmethod
     def print_cmd_params(argument):
+        args = []
         for arg in vars(argument):
-            print(arg, getattr(argument, arg))
+            arg_value = getattr(argument, arg)
+            if arg_value:
+                args.append("{}: {}".format(arg, arg_value))
+        print("Arguments: {}".format(",".join(args)))
 
 
 if __name__ == '__main__':
