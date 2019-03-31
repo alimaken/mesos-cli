@@ -25,6 +25,7 @@ class MesosParser(object):
     host = "odhecx52"
     port = "5040"
     watcher = None
+    cmd_line = []
 
     def __init__(self):
 
@@ -39,6 +40,8 @@ class MesosParser(object):
         parser.add_argument("-w", "--watch", help="Enable Watcher", required=False, default="", action='store_true')
 
         argument = parser.parse_args()
+        self.print_cmd_params(argument)
+
 
         if argument.app:
             self.app_name = argument.app
@@ -222,6 +225,11 @@ class MesosParser(object):
                 return ["SomeFramework"]
             else:
                 return None
+
+    @staticmethod
+    def print_cmd_params(argument):
+        for arg in vars(argument):
+            print(arg, getattr(argument, arg))
 
 
 if __name__ == '__main__':
