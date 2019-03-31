@@ -25,6 +25,7 @@ class MesosParser(object):
     host = "odhecx52"
     port = "5040"
     watcher = None
+    args = None
 
     def __init__(self):
 
@@ -39,6 +40,7 @@ class MesosParser(object):
         parser.add_argument("-w", "--watch", help="Enable Watcher", required=False, default="", action='store_true')
 
         argument = parser.parse_args()
+        self.args = argument
 
         if argument.app:
             self.app_name = argument.app
@@ -88,6 +90,8 @@ class MesosParser(object):
         ]], tablefmt="pipe"))
 
     def print_results(self, url, framework_id):
+
+        self.print_cmd_params(self.args)
 
         metrics = self.get_json_by_rest(self.metrics_url)
         mesos_metrics = MesosMetrics()
@@ -222,6 +226,15 @@ class MesosParser(object):
                 return ["SomeFramework"]
             else:
                 return None
+
+    @staticmethod
+    def print_cmd_params(argument):
+        args = []
+        for arg in vars(argument):
+            arg_value = getattr(argument, arg)
+            if arg_value:
+                args.append("{}: [{}]".format(arg, arg_value))
+        print("Arguments => {}".format(", ".join(args)))
 
 
 if __name__ == '__main__':
