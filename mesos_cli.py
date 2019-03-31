@@ -233,7 +233,7 @@ class MesosParser(object):
         for arg in vars(argument):
             arg_value = getattr(argument, arg)
             if arg_value:
-                args.append("{}: {}".format(arg, arg_value))
+                args.append("{}: [{}]".format(arg, arg_value))
         print("Arguments => {}".format(", ".join(args)))
 
 
